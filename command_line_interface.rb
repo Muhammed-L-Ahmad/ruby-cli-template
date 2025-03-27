@@ -1,29 +1,55 @@
 require './calculator'
 
-pp "what type of mathematical operation would you like to perform? addition, subtraction, multiplication or division?"
-
-their_operation = gets.chomp
-
-if their_operation == "addition"
-  pp "what two numbers would you like to add?"
-  numbers(a, b) = gets.chomp.to_i
-  puts @sum(numbers)
+def valid_number?(input)
+  input.to_i.to_s == input || input.to_f.to_s == input
 end
 
-elsif their_operation == "subtraction"
-  pp "what two numbers would you like to subtract from one another?"
-  numbers(a, b) = gets.chomp.to_i
-  puts @difference(numbers)
+def get_number(prompt)
+  loop do
+    print prompt
+    input = gets.chomp
+    return input.to_f if valid_number?(input)
+    puts "Invalid input.  Please input a valid number."
+  end
 end
 
-elsif their_operation == "multiplication"
-  pp "what two numbers would you like to multiply?"
-  numbers(a, b) = gets.chomp.to_i
-  puts @product(numbers)
+def get_operation
+  loop do
+    print "What type of mathematical operation would you like to perform? (addition, subtraction, multiplication, division): "
+    operation = gets.chomp.downcase
+    return operation if ["addition", "subtraction", "multiplication", "division"].include?(operation)
+    puts "Invalid operation.  Please input either: addition, subtraction, multiplication, or division."
+  end
+end
+
+calculator = Calculator.new
+
+loop do
+  operation = get_operation
+  num1 = get_number("Enter the first number: ")
+  num2 = get_number("Enter the second number: ")
+
+  case operation
+  when "addition"
+    result = calculator.add(num1, num2)
+  when "subtraction"
+    result = calculator.subtract(num1, num2)
+  when "multiplication"
+    result = calculator.multiply(num1, num2)
+  when "division"
+    if num2 == 0
+      puts "Error: Division by zero not valid."
+      next
+    else
+      result = calculator.divide(num1, num2)
+    end
   end
 
-else
-  pp "what numbers do you want to divide by one another?"
-    numbers(a, b) = gets.chomp.to_i
-    puts @dividend(numbers)
-  end
+  puts "The result is: #{result}."
+
+  print "Would you like to perform another calculation? (yes or no): "
+  continue = gets.chomp.downcase
+  break if continue != 'yes'
+end
+
+puts "Thanks for using the calculator!"
