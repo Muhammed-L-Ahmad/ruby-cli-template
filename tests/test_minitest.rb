@@ -8,7 +8,7 @@ class TestCalculator < Minitest::Test
     @sum = @calculator.add(9, 17)
     @difference = @calculator.subtract(12, 3)
     @product = @calculator.multiply(14, 7)
-    @dividend = @calculator.divide(72, 12)
+    @dividend = @calculator.division(72, 12)
   end
 
     def test_addition
