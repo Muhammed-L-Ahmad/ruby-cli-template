@@ -24,4 +24,3 @@ class TestCalculator < Minitest::Test
     def test_division
       assert_equal 6, @dividend, "division method failed"
     end
-end
