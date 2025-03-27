@@ -10,3 +10,7 @@ class Calculator
   def multiply(a, b)
     a * b
   end
+
+  def division(a, b)
+    a / b
+  end
