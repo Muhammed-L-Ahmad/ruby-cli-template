@@ -14,3 +14,5 @@ class Calculator
   def division(a, b)
     a / b
   end
+end
+
